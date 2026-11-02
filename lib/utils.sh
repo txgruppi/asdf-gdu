@@ -90,6 +90,6 @@ do_install() {
 		export ASDF_DOWNLOAD_PATH="$ASDF_INSTALL_PATH/bin"
 		do_download
 	fi
-	echo "asdf-gdu: installing $ASDF_INSTALL_PATH/bin/gdu_$ASDF_INSTALL_VERSION as $ASDF_INSTALL_PATH/bin/gdu" >&2
-	mv "$ASDF_INSTALL_PATH/bin/gdu_$ASDF_INSTALL_VERSION" "$ASDF_INSTALL_PATH/bin/gdu"
+	echo "asdf-gdu: installing $ASDF_DOWNLOAD_PATH/gdu_$ASDF_INSTALL_VERSION as $ASDF_INSTALL_PATH/bin/gdu" >&2
+	mv "$ASDF_DOWNLOAD_PATH/gdu_$ASDF_INSTALL_VERSION" "$ASDF_INSTALL_PATH/bin/gdu"
 }
