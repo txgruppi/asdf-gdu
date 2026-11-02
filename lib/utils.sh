@@ -26,7 +26,8 @@ list_github_tags() {
 		grep -o 'refs/tags/.*' |
 		grep -vF 'gdu-' |
 		cut -d/ -f3- |
-		sed 's/^v//'
+		sed 's/^v//' |
+		grep -v '^[12]\.'
 }
 
 get_platform() {
