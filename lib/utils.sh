@@ -5,7 +5,7 @@ set -euo pipefail
 GH_REPO="https://github.com/dundee/gdu"
 
 fail() {
-	echo -e "asdf-gdu: $*"
+	echo -e "asdf-gdu: $*" >&2
 	exit 1
 }
 
@@ -72,13 +72,16 @@ do_download() {
 	local arch="$(get_architecture)"
 	local filename="$ASDF_DOWNLOAD_PATH/gdu_${plat}_${arch}.tgz"
 	local url="$GH_REPO/releases/download/v${version}/gdu_${plat}_${arch}.tgz"
+	echo "asdf-gdu: downloading $url" >&2
 	curl "${curl_opts[@]}" -o "$filename" -C - "$url" || fail "could not download $url"
+	echo "asdf-gdu: extracting $filename"
 	tar -xf "$filename" -C "$ASDF_DOWNLOAD_PATH" || (
 		rm -f "$filename" &>/dev/null || true
 		fail "could not extract $filename"
 	)
 	rm -f "$filename"
 	mv "$ASDF_DOWNLOAD_PATH/gdu_$(get_platform)_$(get_architecture)" "$ASDF_DOWNLOAD_PATH/gdu_$ASDF_INSTALL_VERSION"
+	echo "asdf-gdu: downloaded $ASDF_DOWNLOAD_PATH/gdu_$ASDF_INSTALL_VERSION"
 }
 
 do_install() {
@@ -87,5 +90,6 @@ do_install() {
 		export ASDF_DOWNLOAD_PATH="$ASDF_INSTALL_PATH/bin"
 		do_download
 	fi
+	echo "asdf-gdu: installing $ASDF_DOWNLOAD_PATH/gdu_$ASDF_INSTALL_VERSION as $ASDF_DOWNLOAD_PATH/gdu" >&2
 	mv "$ASDF_DOWNLOAD_PATH/gdu_$ASDF_INSTALL_VERSION" "$ASDF_DOWNLOAD_PATH/gdu"
 }
