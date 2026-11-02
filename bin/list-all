@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+source "$(dirname "$(dirname "${BASH_SOURCE[0]}")")/lib/utils.sh"
+
+list_github_tags | sort_versions | xargs echo
