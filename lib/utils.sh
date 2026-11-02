@@ -91,5 +91,6 @@ do_install() {
 		do_download
 	fi
 	echo "asdf-gdu: installing $ASDF_DOWNLOAD_PATH/gdu_$ASDF_INSTALL_VERSION as $ASDF_INSTALL_PATH/bin/gdu" >&2
+	mkdir -p "$ASDF_INSTALL_PATH/bin"
 	mv "$ASDF_DOWNLOAD_PATH/gdu_$ASDF_INSTALL_VERSION" "$ASDF_INSTALL_PATH/bin/gdu"
 }
